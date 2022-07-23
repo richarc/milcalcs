@@ -9,6 +9,7 @@ import (
 
 //clean this up when we do the variable milenage
 func calculateOPC(k_string, op_string string) string {
+	//These Ki and OP values are from 35 207, implementers test data
 	//k_string := "465b5ce8b199b49faa5f0a2ee238a6bc"
 	//op_string := "cdc202d5123e20f62b6d676ac72cb318"
 

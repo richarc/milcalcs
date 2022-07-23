@@ -98,6 +98,6 @@ func main() {
 
 	w.SetContent(container.New(layout.NewVBoxLayout(), opcf, opcb, tb))
 
-	w.Resize(fyne.Size{Width: 500, Height: 500})
+	w.Resize(fyne.Size{Width: 600, Height: 500})
 	w.ShowAndRun()
 }
