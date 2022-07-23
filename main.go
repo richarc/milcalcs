@@ -5,6 +5,7 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
@@ -79,7 +80,7 @@ func (app *config) clearFunc() func() {
 //Create the coopy button and layout
 //use to copy the OPc value when calcualted
 //Call it tool bar as we may add more tool functions at a later date
-func (app *config) createToolBar(win fyne.Window) *fyne.Container {
+func (app *config) createCopyBar(win fyne.Window) *fyne.Container {
 	copy_tool := widget.NewButtonWithIcon("Copy OPc", theme.ContentCopyIcon(), func() {
 		win.Clipboard().SetContent(app.OPcVal.Text)
 	})
@@ -90,13 +91,18 @@ func (app *config) createToolBar(win fyne.Window) *fyne.Container {
 
 func main() {
 	a := app.New()
-	w := a.NewWindow("Hello Window")
+	w := a.NewWindow("Milenage calculations")
 
+	tb := cfg.createToolBar()
+	tabs := container.NewAppTabs(
+		container.NewTabItemWithIcon("OPc Calculation", theme.HomeIcon(), canvas.NewText("OPC Window", nil)),
+		container.NewTabItemWithIcon("K4 Calculation", theme.MediaPlayIcon(), canvas.NewText("K4 Window", nil)),
+	)
 	opcf := cfg.createOPCForm()
 	opcb := cfg.createOPCButtons()
-	tb := cfg.createToolBar(w)
+	cb := cfg.createCopyBar(w)
 
-	w.SetContent(container.New(layout.NewVBoxLayout(), opcf, opcb, tb))
+	w.SetContent(container.New(layout.NewVBoxLayout(), tb, tabs, opcf, opcb, cb))
 
 	w.Resize(fyne.Size{Width: 600, Height: 500})
 	w.ShowAndRun()
