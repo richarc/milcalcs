@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
@@ -103,12 +102,14 @@ func (app *config) createMainUI() *fyne.Container {
 
 	//pull the container out so that it can be referenced in the TabItem
 	opc_form := container.New(layout.NewVBoxLayout(), sep, opcf, opcb, cb)
+	//form for the K4 calculations
+	k4form := app.createK4UI()
 	//Form for the milenage calculations
 	milform := app.createMilUi()
 
 	tabs := container.NewAppTabs(
 		container.NewTabItemWithIcon("OPc Calculation", theme.HomeIcon(), opc_form),
-		container.NewTabItemWithIcon("K4 Calculation", theme.MediaPlayIcon(), canvas.NewText("K4 Window", nil)),
+		container.NewTabItemWithIcon("K4 Calculation", theme.MediaPlayIcon(), k4form),
 		container.NewTabItemWithIcon("Milenage R+C", theme.MediaPlayIcon(), milform),
 	)
 	// return the following container
