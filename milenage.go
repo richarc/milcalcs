@@ -7,12 +7,14 @@ import (
 	"github.com/magma/milenage"
 )
 
-/*
+//struct to represent the defualt Milenage constants
+//while 35 206 defines them as constant they are actually variable
 type milconst struct {
 	r1, r2, r3, r4, r5 int8
 	c1, c2, c3, c4, c5 byte
 }
-*/
+
+var milvals = milconst{64, 0, 32, 64, 96, byte(0), byte(1), byte(2), byte(4), byte(8)}
 
 //clean this up when we do the variable milenage
 func calculateOPC(k_string, op_string string) string {

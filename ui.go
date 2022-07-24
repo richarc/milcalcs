@@ -1,7 +1,10 @@
 package main
 
 import (
+	"encoding/hex"
 	"log"
+	"math/rand"
+	"time"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -73,26 +76,41 @@ func (app *config) createCopyBar(win fyne.Window) *fyne.Container {
 	copy_tool := widget.NewButtonWithIcon("Copy OPc", theme.ContentCopyIcon(), func() {
 		win.Clipboard().SetContent(app.OPcVal.Text)
 	})
-	tool_bar := container.New(layout.NewHBoxLayout(), layout.NewSpacer(), copy_tool)
+
+	//generate a random Ki value
+	rnd_ki := widget.NewButtonWithIcon("Rnd Ki", theme.ContentPasteIcon(), func() {
+		rnd_src := rand.New(rand.NewSource(time.Now().UnixNano()))
+		b := make([]byte, 16)
+		if _, err := rnd_src.Read(b); err != nil {
+			panic(err)
+		}
+		cfg.KiEntry.Text = hex.EncodeToString(b)
+		cfg.KiEntry.Refresh()
+	})
+
+	tool_bar := container.New(layout.NewHBoxLayout(), layout.NewSpacer(), rnd_ki, copy_tool)
 
 	return tool_bar
 }
 
 func (app *config) createMainUI() *fyne.Container {
 
-	tb := cfg.createToolBar()
+	//tb := cfg.createToolBar()
+	sep := widget.NewSeparator()
 	opcf := cfg.createOPCForm()
 	opcb := cfg.createOPCButtons()
 	cb := cfg.createCopyBar(cfg.mainWindow)
 
 	//pull the container out so that it can be referenced in the TabItem
-	opc_form := container.New(layout.NewVBoxLayout(), opcf, opcb, cb)
+	opc_form := container.New(layout.NewVBoxLayout(), sep, opcf, opcb, cb)
+	//Form for the milenage calculations
+	milform := app.createMilUi()
 
 	tabs := container.NewAppTabs(
 		container.NewTabItemWithIcon("OPc Calculation", theme.HomeIcon(), opc_form),
 		container.NewTabItemWithIcon("K4 Calculation", theme.MediaPlayIcon(), canvas.NewText("K4 Window", nil)),
-		container.NewTabItemWithIcon("Milenage R+C", theme.MediaPlayIcon(), canvas.NewText("Milenage R and C Values", nil)),
+		container.NewTabItemWithIcon("Milenage R+C", theme.MediaPlayIcon(), milform),
 	)
 	// return the following container
-	return container.New(layout.NewVBoxLayout(), tb, tabs)
+	return container.New(layout.NewPaddedLayout(), tabs)
 }

@@ -1,11 +1,13 @@
 package main
 
+/*
 import (
-	"fyne.io/fyne/v2/theme"
+	"fyne.io/fyne/theme"
 	"fyne.io/fyne/v2/widget"
 )
 
 func (app *config) createToolBar() *widget.Toolbar {
+
 	toolBar := widget.NewToolbar(
 		widget.NewToolbarSpacer(),
 		widget.NewToolbarAction(theme.DocumentCreateIcon(), func() {}),
@@ -14,4 +16,6 @@ func (app *config) createToolBar() *widget.Toolbar {
 	)
 
 	return toolBar
+
 }
+*/
