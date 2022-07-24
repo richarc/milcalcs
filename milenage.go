@@ -7,6 +7,13 @@ import (
 	"github.com/magma/milenage"
 )
 
+/*
+type milconst struct {
+	r1, r2, r3, r4, r5 int8
+	c1, c2, c3, c4, c5 byte
+}
+*/
+
 //clean this up when we do the variable milenage
 func calculateOPC(k_string, op_string string) string {
 	//These Ki and OP values are from 35 207, implementers test data
