@@ -38,8 +38,8 @@ func (app *config) createOPCForm() *fyne.Container {
 
 //Create the OPc Form button bar
 func (app *config) createOPCButtons() *fyne.Container {
-	calc := widget.NewButton("Calculate", app.calcFunc())
-	clear := widget.NewButton("Clear", app.clearFunc())
+	calc := widget.NewButton("Calculate", app.calcOPCFunc())
+	clear := widget.NewButton("Clear", app.clearOPCFunc())
 	sp := layout.NewSpacer()
 
 	con := container.New(layout.NewHBoxLayout(), sp, clear, calc)
@@ -51,7 +51,7 @@ func (app *config) createOPCButtons() *fyne.Container {
 //this is just to kep the code clearer and more readable
 
 //The calc function for OPC Form
-func (app *config) calcFunc() func() {
+func (app *config) calcOPCFunc() func() {
 	return func() {
 		log.Println("Ki:", app.KiEntry.Text)
 		log.Println("OP:", app.OPEntry.Text)
@@ -60,7 +60,7 @@ func (app *config) calcFunc() func() {
 }
 
 //The clear function for OPC Form
-func (app *config) clearFunc() func() {
+func (app *config) clearOPCFunc() func() {
 	return func() {
 		app.KiEntry.SetText("")
 		app.OPEntry.SetText("")
@@ -71,9 +71,9 @@ func (app *config) clearFunc() func() {
 //Create the coopy button and layout
 //use to copy the OPc value when calcualted
 //Call it tool bar as we may add more tool functions at a later date
-func (app *config) createCopyBar(win fyne.Window) *fyne.Container {
+func (app *config) createCopyBar() *fyne.Container {
 	copy_tool := widget.NewButtonWithIcon("Copy OPc", theme.ContentCopyIcon(), func() {
-		win.Clipboard().SetContent(app.OPcVal.Text)
+		app.mainWindow.Clipboard().SetContent(app.OPcVal.Text)
 	})
 
 	//generate a random Ki value
@@ -98,7 +98,7 @@ func (app *config) createMainUI() *fyne.Container {
 	sep := widget.NewSeparator()
 	opcf := cfg.createOPCForm()
 	opcb := cfg.createOPCButtons()
-	cb := cfg.createCopyBar(cfg.mainWindow)
+	cb := cfg.createCopyBar()
 
 	//pull the container out so that it can be referenced in the TabItem
 	opc_form := container.New(layout.NewVBoxLayout(), sep, opcf, opcb, cb)

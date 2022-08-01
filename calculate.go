@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/des"
 	"encoding/hex"
 	"fmt"
 
@@ -41,4 +42,37 @@ func calculateOPC(k_string, op_string string) string {
 	}
 	opc_string := fmt.Sprintf("%x", opc_bytes)
 	return opc_string
+}
+
+// calulate an eKi or an eOPc given a K4 key and the selected algorthm
+//this also needs a big clean up
+func calculateK4out(k4_string, alg_option, kiopc_string string) string {
+
+	switch alg_option {
+	case "DES ECB":
+		//Select DES Cypher
+		c, err := des.NewCipher([]byte(k4_string))
+		if err != nil {
+			//fmt.Println(err)
+			return fmt.Sprintf("Error %v ", err)
+		}
+
+		kiopcByte := make([]byte, len(kiopc_string))
+		c.Encrypt(kiopcByte, []byte(kiopc_string))
+		return hex.EncodeToString(kiopcByte)
+
+	case "3DES ECB":
+		//Select DES Cypher
+		c, err := des.NewTripleDESCipher([]byte(k4_string))
+		if err != nil {
+			//fmt.Println(err)
+			return fmt.Sprintf("Error %v ", err)
+		}
+
+		kiopcByte := make([]byte, len(kiopc_string))
+		c.Encrypt(kiopcByte, []byte(kiopc_string))
+		return hex.EncodeToString(kiopcByte)
+	}
+
+	return "Invalid Algo Selected"
 }
