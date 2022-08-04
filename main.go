@@ -6,13 +6,13 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-// create a type that allows us to access Ui elements across scope of different functions
+//Create a type that allows us to access Ui elements across scope of different functions
 type config struct {
 	KiEntry *widget.Entry
 	OPEntry *widget.Entry
 	OPcVal  *widget.Label
 
-	// K$ form entry eidgets
+	//K4 form entry eidgets
 	K4KeyEntry *widget.Entry
 	K4OptEntry *widget.Select
 	EkoEntry   *widget.Entry

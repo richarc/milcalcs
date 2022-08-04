@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	fyne.io/fyne/v2 v2.2.3
+	github.com/forgoer/openssl v1.2.1
 	github.com/magma/milenage v1.0.2
 )
 

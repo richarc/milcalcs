@@ -1,10 +1,10 @@
 package main
 
 import (
-	"crypto/des"
 	"encoding/hex"
 	"fmt"
 
+	"github.com/forgoer/openssl"
 	"github.com/magma/milenage"
 )
 
@@ -50,28 +50,43 @@ func calculateK4out(k4_string, alg_option, kiopc_string string) string {
 
 	switch alg_option {
 	case "DES ECB":
-		//Select DES Cypher
-		c, err := des.NewCipher([]byte(k4_string))
+		//convert string to []bytes and check thathe key length is 8 bytes
+		key := []byte(k4_string)
+		if len(key) != 8 {
+			return "Error: Key length must be 8"
+		}
+		src := []byte(kiopc_string)
+		dst, err := openssl.DesECBEncrypt(src, key, openssl.PKCS7_PADDING)
 		if err != nil {
-			//fmt.Println(err)
 			return fmt.Sprintf("Error %v ", err)
 		}
-
-		kiopcByte := make([]byte, len(kiopc_string))
-		c.Encrypt(kiopcByte, []byte(kiopc_string))
-		return hex.EncodeToString(kiopcByte)
+		return fmt.Sprintf("%x", dst)
 
 	case "3DES ECB":
-		//Select DES Cypher
-		c, err := des.NewTripleDESCipher([]byte(k4_string))
+		//convert string to []bytes and check thathe key length is 8 bytes
+		key := []byte(k4_string)
+		if len(key) != 24 {
+			return "Error: Key length must be 24"
+		}
+		src := []byte(kiopc_string)
+		dst, err := openssl.Des3ECBEncrypt(src, key, openssl.PKCS7_PADDING)
 		if err != nil {
-			//fmt.Println(err)
 			return fmt.Sprintf("Error %v ", err)
 		}
+		return fmt.Sprintf("%x", dst)
 
-		kiopcByte := make([]byte, len(kiopc_string))
-		c.Encrypt(kiopcByte, []byte(kiopc_string))
-		return hex.EncodeToString(kiopcByte)
+	case "AES 128 ECB":
+		//convert string to []bytes and check thathe key length is 8 bytes
+		key := []byte(k4_string)
+		if len(key) != 16 {
+			return "Error: Key length must be 16"
+		}
+		src := []byte(kiopc_string)
+		dst, err := openssl.AesECBEncrypt(src, key, openssl.PKCS7_PADDING)
+		if err != nil {
+			return fmt.Sprintf("Error %v ", err)
+		}
+		return fmt.Sprintf("%x", dst)
 	}
 
 	return "Invalid Algo Selected"

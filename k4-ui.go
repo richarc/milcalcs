@@ -19,9 +19,7 @@ func (app *config) createK4UI() *fyne.Container {
 	opts := []string{
 		"DES ECB",
 		"3DES ECB",
-		"3DES CBC",
 		"AES 128 ECB",
-		"AES 128 CBC",
 	}
 	//label for cypher options
 	optsl := widget.NewLabel("Select Cypher:")
