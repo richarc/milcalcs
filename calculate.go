@@ -10,12 +10,25 @@ import (
 
 //struct to represent the defualt Milenage constants
 //while 35 206 defines them as constant they are actually variable
+
+type c16 [16]byte
 type milconst struct {
 	r1, r2, r3, r4, r5 int8
-	c1, c2, c3, c4, c5 byte
+	c1, c2, c3, c4, c5 c16
 }
 
-var milvals = milconst{64, 0, 32, 64, 96, byte(0), byte(1), byte(2), byte(4), byte(8)}
+var milvals = milconst{
+	r1: 64,
+	r2: 0,
+	r3: 32,
+	r4: 64,
+	r5: 96,
+	c1: [16]byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	c2: [16]byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
+	c3: [16]byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4},
+	c4: [16]byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8},
+	c5: [16]byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16},
+}
 
 //clean this up when we do the variable milenage
 func calculateOPC(k_string, op_string string) string {
