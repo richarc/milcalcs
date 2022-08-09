@@ -13,9 +13,9 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-//Creat the widgets that are needed for the OPc calculation form
-//Save the Entry widgets to the global cfg as we will need to access them
-//from other functions and we will need them for testing
+// Creat the widgets that are needed for the OPc calculation form
+// Save the Entry widgets to the global cfg as we will need to access them
+// from other functions and we will need them for testing
 func (app *config) createOPCForm() *fyne.Container {
 	ki := widget.NewEntry()
 	op := widget.NewEntry()
@@ -36,7 +36,7 @@ func (app *config) createOPCForm() *fyne.Container {
 	return con
 }
 
-//Create the OPc Form button bar
+// Create the OPc Form button bar
 func (app *config) createOPCButtons() *fyne.Container {
 	calc := widget.NewButton("Calculate", app.calcOPCFunc())
 	clear := widget.NewButton("Clear", app.clearOPCFunc())
@@ -50,7 +50,7 @@ func (app *config) createOPCButtons() *fyne.Container {
 //Implement the button functions as seperate functions returning a function
 //this is just to kep the code clearer and more readable
 
-//The calc function for OPC Form
+// The calc function for OPC Form
 func (app *config) calcOPCFunc() func() {
 	return func() {
 		log.Println("Ki:", app.KiEntry.Text)
@@ -59,7 +59,7 @@ func (app *config) calcOPCFunc() func() {
 	}
 }
 
-//The clear function for OPC Form
+// The clear function for OPC Form
 func (app *config) clearOPCFunc() func() {
 	return func() {
 		app.KiEntry.SetText("")
@@ -68,9 +68,9 @@ func (app *config) clearOPCFunc() func() {
 	}
 }
 
-//Create the coopy button and layout
-//use to copy the OPc value when calcualted
-//Call it tool bar as we may add more tool functions at a later date
+// Create the coopy button and layout
+// use to copy the OPc value when calcualted
+// Call it tool bar as we may add more tool functions at a later date
 func (app *config) createCopyBar() *fyne.Container {
 	copy_tool := widget.NewButtonWithIcon("Copy OPc", theme.ContentCopyIcon(), func() {
 		app.mainWindow.Clipboard().SetContent(app.OPcVal.Text)
@@ -94,7 +94,6 @@ func (app *config) createCopyBar() *fyne.Container {
 
 func (app *config) createMainUI() *fyne.Container {
 
-	//tb := cfg.createToolBar()
 	sep := widget.NewSeparator()
 	opcf := cfg.createOPCForm()
 	opcb := cfg.createOPCButtons()
@@ -104,13 +103,10 @@ func (app *config) createMainUI() *fyne.Container {
 	opc_form := container.New(layout.NewVBoxLayout(), sep, opcf, opcb, cb)
 	//form for the K4 calculations
 	k4form := app.createK4UI()
-	//Form for the milenage calculations
-	milform := app.createMilUi()
 
 	tabs := container.NewAppTabs(
 		container.NewTabItemWithIcon("OPc Calculation", theme.HomeIcon(), opc_form),
 		container.NewTabItemWithIcon("K4 Calculation", theme.MediaPlayIcon(), k4form),
-		container.NewTabItemWithIcon("Milenage R+C", theme.MediaPlayIcon(), milform),
 	)
 	// return the following container
 	return container.New(layout.NewPaddedLayout(), tabs)
