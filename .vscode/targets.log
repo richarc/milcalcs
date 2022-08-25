@@ -6,8 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Tue Aug  9 21:33:43 2022
+# Make data base, printed on Tue Aug  9 22:46:50 2022
 
 # Variables
 
@@ -26,7 +27,7 @@ PLATFORMIO_IDE = 2.5.1
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/richarc/Development/mil-calc
+CURDIR := /Users/richarc/go/mil-calc
 # makefile
 SHELL = /bin/sh
 # environment
@@ -60,11 +61,11 @@ SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.xavmJj2jGb/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /Users/richarc/Development/mil-calc
+PWD = /Users/richarc/go/mil-calc
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-GOMODCACHE = /User/richarc/go/pkg/mod
+GOMODCACHE = /Users/richarc/go/pkg/mod
 # environment
 PYENV_SHELL = zsh
 # environment
@@ -84,7 +85,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-PLATFORMIO_PATH = /Users/richarc/.platformio/python3/bin:/Users/richarc/.pyenv/shims:/Users/richarc/.asdf/shims:/usr/local/opt/asdf/libexec/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/richarc/go/bin
+PLATFORMIO_PATH = /Users/richarc/.platformio/python3/bin:/Users/richarc/.asdf/installs/golang/1.19/go/bin:/Users/richarc/.pyenv/shims:/Users/richarc/.asdf/shims:/usr/local/opt/asdf/libexec/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/richarc/go/bin
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -160,7 +161,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 11635
+VSCODE_PID = 14041
 # variable set hash-table stats:
 # Load=75/1024=7%, Rehash=0, Collisions=4/99=4%
 
@@ -170,9 +171,9 @@ VSCODE_PID = 11635
 
 # Directories
 
-# . (device 16777220, inode 6710141): 14 files, no impossibilities.
+# . (device 16777220, inode 6710141): 13 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -198,6 +199,9 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+ 
+make: *** No rule to make target `all'.  Stop.
+
 #  Last modified 2022-07-23 14:34:02
 #  File has been updated.
 #  Successfully updated.
@@ -259,8 +263,6 @@ clean:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug  9 21:33:43 2022
+# Finished Make data base on Tue Aug  9 22:46:50 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-
